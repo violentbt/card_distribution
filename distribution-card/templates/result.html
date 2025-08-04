@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نتایج نوبت‌دهی</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/rastakhiz-font@v2.1.0/css/font-face.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Vazir', sans-serif;
+      background-color: #050510;
+      color: #eee;
+      direction: rtl;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Rastakhiz', serif;
+      color: #9d00ff;
+      text-shadow: 0 0 10px #9d00ffaa;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(30, 20, 60, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #9d00ff88;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #9d00ff66;
+      padding: 10px;
+      text-align: center;
+      font-size: 1rem;
+      color: #ddd;
+    }
+    th {
+      background: #9d00ff44;
+      font-family: 'Rastakhiz', serif;
+      font-weight: normal;
+    }
+    caption {
+      font-family: 'Rastakhiz', serif;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #ff66ffcc;
+      text-shadow: 0 0 6px #ff66ffcc;
+    }
+    .back-btn {
+      background: linear-gradient(90deg, #9d00ff, #00e5ff);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00e5ffbb;
+      display: block;
+      margin: 0 auto;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      width: fit-content;
+    }
+    .back-btn:hover {
+      box-shadow: 0 0 25px #ff00e5dd;
+      background: linear-gradient(90deg, #ff00e5, #00e5ff);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>نتایج نوبت‌دهی</h1>
+
+    <table>
+      <caption>تیم بسته‌بندی تهران (بازه صبح)</caption>
+      <thead>
+        <tr>
+          <th>نام فرد</th>
+          <th>تعداد کل کارت‌ها</th>
+          <th>تعداد کنترل کیفیت</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for person in tehran_morning_team %}
+        <tr>
+          <td>{{ person }}</td>
+          <td>{{ morning_cards[person] }}</td>
+          <td>{{ morning_quality[person] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <table>
+      <caption>تیم بسته‌بندی تهران (بازه عصر)</caption>
+      <thead>
+        <tr>
+          <th>نام فرد</th>
+          <th>تعداد کل کارت‌ها</th>
+          <th>تعداد کنترل کیفیت</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for person in tehran_evening_team %}
+        <tr>
+          <td>{{ person }}</td>
+          <td>{{ evening_cards[person] }}</td>
+          <td>{{ evening_quality[person] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <table>
+      <caption>تیم بسته‌بندی شهرستان</caption>
+      <thead>
+        <tr>
+          <th>نام فرد</th>
+          <th>تعداد کل کارت‌ها</th>
+          <th>تعداد کنترل کیفیت</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for person in shahrestan_team %}
+        <tr>
+          <td>{{ person }}</td>
+          <td>{{ shahrestan_cards[person] }}</td>
+          <td>{{ shahrestan_quality[person] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if remaining_people %}
+    <h3 style="text-align:center; color:#ff77ffcc; margin-bottom:20px;">افراد باقی‌مانده جهت بسته بندی پست: </h3>
+    <ul style="list-style:none; text-align:center; padding:0; color:#ddd;">
+      {% for person in remaining_people %}
+      <li>{{ person }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a href="/" class="back-btn">بازگشت به صفحه اصلی</a>
+  </div>
+</body>
+</html>

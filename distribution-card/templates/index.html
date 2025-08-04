@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>سامانه نوبت‌دهی بسته‌بندی</title>
+  <!-- فونت وزیر -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" />
+  <!-- فونت رستاخیز (از وبفونت گوگل یا آپلود خودت) -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/rastakhiz-font@v2.1.0/css/font-face.css" rel="stylesheet" />
+  <style>
+    /* فونت‌ها */
+    body {
+      font-family: 'Vazir', sans-serif;
+      background-color: #050510;
+      color: #eee;
+      direction: rtl;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Rastakhiz', serif;
+      color: #9d00ff;
+      text-shadow: 0 0 10px #9d00ffaa;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(30, 20, 60, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #9d00ff88;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #bb99ff;
+    }
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 20px;
+      background: #222042;
+      color: #eee;
+      box-shadow: inset 0 0 8px #9d00ff66;
+      font-size: 1rem;
+    }
+    input[type="submit"],
+    button {
+      background: linear-gradient(90deg, #9d00ff, #00e5ff);
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00e5ffbb;
+      transition: all 0.3s ease;
+    }
+    input[type="submit"]:hover,
+    button:hover {
+      box-shadow: 0 0 25px #ff00e5dd;
+      background: linear-gradient(90deg, #ff00e5, #00e5ff);
+    }
+    .error {
+      background: #ff0044cc;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 0 15px #ff0044cc;
+    }
+    .message {
+      background: #00cc66cc;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 0 15px #00cc66cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>سامانه نوبت‌دهی بسته‌بندی</h1>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    {% if message %}
+      <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <form method="post" action="/">
+      <label for="people">نام افراد (با کاما جدا کنید):</label>
+      <input type="text" id="people" name="people" placeholder="مثلاً: بهاره, مبینا، محمد, حسین" required />
+
+      <label for="tehran_morning_total">تعداد کل کارت‌های بسته‌بندی تهران (بازه صبح):</label>
+      <input type="number" id="tehran_morning_total" name="tehran_morning_total" min="0" required />
+
+      <label for="tehran_morning_quality">تعداد کارت‌های کنترل کیفیت تهران (بازه صبح):</label>
+      <input type="number" id="tehran_morning_quality" name="tehran_morning_quality" min="0" required />
+
+      <label for="tehran_evening_total">تعداد کل کارت‌های بسته‌بندی تهران (بازه عصر):</label>
+      <input type="number" id="tehran_evening_total" name="tehran_evening_total" min="0" required />
+
+      <label for="tehran_evening_quality">تعداد کارت‌های کنترل کیفیت تهران (بازه عصر):</label>
+      <input type="number" id="tehran_evening_quality" name="tehran_evening_quality" min="0" required />
+
+      <label for="shahrestan_total">تعداد کل کارت‌های بسته‌بندی شهرستان:</label>
+      <input type="number" id="shahrestan_total" name="shahrestan_total" min="0" required />
+
+      <label for="shahrestan_quality">تعداد کارت‌های کنترل کیفیت شهرستان:</label>
+      <input type="number" id="shahrestan_quality" name="shahrestan_quality" min="0" required />
+
+      <label for="max_limit">حداکثر کارت برای هر نفر:</label>
+      <input type="number" id="max_limit" name="max_limit" min="1" value="900" required />
+
+      <input type="submit" value="محاسبه و نوبت‌دهی" />
+    </form>
+
+    <form method="post" action="/reset" style="margin-top:20px; text-align:center;">
+      <button type="submit">ریست نوبت‌دهی</button>
+    </form>
+  </div>
+</body>
+</html>
